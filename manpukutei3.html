@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>焼肉 万福亭 — 本庄市けや木の炭火焼肉</title>
+<meta name="description" content="埼玉県本庄市けや木の焼肉店「万福亭」。厳選したお肉を炭火で。宴会のご予約はお電話にて。駐車場完備。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1c1107;
+  --paper: #f4efe6;
+  --warm-white: #fdf9f3;
+  --ember: #c0390f;
+  --emberglow: #e8521a;
+  --gold: #b8922a;
+  --gold-light: #d4ae58;
+  --smoke: #6b5140;
+  --charcoal: #2e1e10;
+  --line: rgba(184,146,42,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--warm-white);
+  color: var(--ink);
+  font-family: 'Noto Serif JP', serif;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 5%;
+  background: rgba(252,249,243,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s;
+}
+.nav-logo {
+  font-family: 'Zen Old Mincho', serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+.nav-logo span { color: var(--ember); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--smoke);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ember); }
+.nav-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--ember);
+  color: white !important;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  font-weight: 500;
+}
+.nav-tel:hover { background: var(--emberglow) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 8% 6rem 8%;
+  position: relative;
+  z-index: 2;
+}
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--warm-white) 0%, transparent 30%);
+}
+
+.hero-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--smoke);
+  line-height: 2;
+  max-width: 28ch;
+  margin-bottom: 3rem;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--ember);
+  color: white;
+  text-decoration: none;
+  padding: 1.1rem 2.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  transition: all 0.3s;
+  align-self: flex-start;
+}
+.hero-cta:hover { background: var(--emberglow); transform: translateX(4px); }
+.hero-cta::after { content: '→'; transition: transform 0.2s; }
+.hero-cta:hover::after { transform: translateX(4px); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 8%;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--smoke);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  writing-mode: vertical-rl;
+}
+.hero-scroll::after {
+  content: '';
+  width: 1px;
+  height: 4rem;
+  background: linear-gradient(to bottom, var(--smoke), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: var(--charcoal);
+  color: var(--paper);
+  padding: 4rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+.strip-item { text-align: center; }
+.strip-item .num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 2.8rem;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.strip-item .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: rgba(244,239,230,0.5);
+}
+.strip-divider {
+  width: 1px;
+  height: 3rem;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── SECTION BASE ── */
+.section {
+  padding: 9rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.5em;
+  color: var(--ember);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--smoke);
+  line-height: 2;
+  max-width: 40ch;
+  margin-bottom: 4rem;
+}
+
+/* ── ABOUT ── */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  align-items: center;
+}
+.about-img-stack {
+  position: relative;
+  height: 500px;
+}
+.about-img-main {
+  position: absolute;
+  top: 0; left: 0;
+  width: 80%;
+  height: 85%;
+  object-fit: cover;
+}
+.about-img-accent {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 55%;
+  height: 55%;
+  object-fit: cover;
+  border: 6px solid var(--warm-white);
+}
+.about-text { font-size: 0.9rem; line-height: 2.2; color: var(--smoke); }
+.about-text p + p { margin-top: 1.4em; }
+.about-sig {
+  margin-top: 2.5rem;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+.about-sig span { display: block; font-size: 0.7rem; letter-spacing: 0.25em; color: var(--smoke); margin-bottom: 0.4rem; font-family: 'Noto Serif JP', serif; }
+
+/* ── MENU ── */
+.menu-section { background: var(--paper); }
+.menu-section .section { max-width: 1200px; }
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5px;
+  background: var(--line);
+  border: 1.5px solid var(--line);
+}
+.menu-card {
+  background: var(--warm-white);
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  transition: background 0.25s;
+  cursor: default;
+}
+.menu-card:hover { background: #fff8f0; }
+.menu-card-num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 2.5rem;
+  color: var(--line);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.5rem;
+  text-align: center;
+  margin-top: 0.1rem;
+}
+.menu-card-body h3 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+.menu-card-body p { font-size: 0.82rem; color: var(--smoke); line-height: 1.9; }
+.menu-card-price {
+  margin-top: 1.2rem;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 1.1rem;
+  color: var(--ember);
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+.menu-card-price small { font-size: 0.65rem; color: var(--smoke); font-family: 'Noto Serif JP', serif; letter-spacing: 0.1em; }
+
+.menu-note {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--smoke);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* ── INFO ── */
+.info-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 5rem;
+  align-items: start;
+}
+.info-rows { display: flex; flex-direction: column; }
+.info-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.info-row:first-child { border-top: 1px solid var(--line); }
+.info-key {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  padding-top: 0.15rem;
+}
+.info-val { font-size: 0.88rem; color: var(--smoke); line-height: 1.9; }
+.info-val a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: color 0.2s; }
+.info-val a:hover { color: var(--ember); }
+.info-badge {
+  display: inline-block;
+  background: var(--ember);
+  color: white;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  margin-left: 0.5rem;
+  letter-spacing: 0.1em;
+  vertical-align: middle;
+}
+.map-frame {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border: none;
+  display: block;
+  filter: sepia(10%) contrast(95%);
+}
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  background: var(--charcoal);
+  padding: 7rem 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '万';
+  position: absolute;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 28rem;
+  color: rgba(184,146,42,0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  line-height: 1;
+}
+.cta-banner h2 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--paper);
+  margin-bottom: 1rem;
+}
+.cta-banner p {
+  font-size: 0.85rem;
+  color: rgba(244,239,230,0.55);
+  margin-bottom: 3rem;
+  letter-spacing: 0.1em;
+}
+.cta-tel {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.cta-tel .tel-num {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.cta-tel:hover .tel-num { color: white; }
+.cta-tel .tel-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: rgba(244,239,230,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 4rem 5% 3rem;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.footer-logo {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 1.4rem;
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 900;
+}
+.footer-logo small {
+  display: block;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--smoke);
+  margin-top: 0.4rem;
+  font-weight: 400;
+}
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: rgba(244,239,230,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-copy {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: rgba(244,239,230,0.2);
+  text-align: right;
+}
+
+/* ── LEGAL ── */
+.legal-drawer {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  font-size: 0.72rem;
+  color: rgba(244,239,230,0.2);
+  line-height: 2;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding-top: 2rem;
+}
+.legal-drawer strong { color: rgba(244,239,230,0.4); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { height: 55vw; }
+  .hero-right::after { background: linear-gradient(to bottom, transparent 40%, var(--warm-white) 100%); }
+  .hero-left { padding: 8rem 6% 4rem; }
+  .about-wrap, .info-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .about-img-stack { height: 320px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .intro-strip { gap: 2.5rem; }
+  .strip-divider { display: none; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">焼肉 <span>万福亭</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">こだわり</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#visit">店舗案内</a></li>
+    <li><a href="tel:0495-24-3456" class="nav-tel">☎ 予約する</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">本庄市けや木　炭火焼肉</p>
+    <h1>万福亭</h1>
+    <p class="hero-sub">炭火の香りと、選びぬいたお肉。<br>家族で、仲間で、大切な日に。<br>ゆっくり過ごせるお店でお待ちしています。</p>
+    <a href="tel:0495-24-3456" class="hero-cta">お電話でご予約</a>
+    <div class="hero-scroll">SCROLL</div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=900" alt="炭火焼肉のイメージ">
+  </div>
+</header>
+
+<!-- STRIP -->
+<div class="intro-strip">
+  <div class="strip-item">
+    <div class="num">炭火</div>
+    <div class="label">CHARCOAL GRILL</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="num">17:00〜</small></div>
+    <div class="label">OPEN</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="num">水</div>
+    <div class="label">CLOSED</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="num">P</div>
+    <div class="label">PARKING</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap">
+    <div class="about-img-stack reveal">
+      <img class="about-img-main" src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&q=80&w=700" alt="焼肉の様子">
+      <img class="about-img-accent" src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80&w=500" alt="お肉のアップ">
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <span class="section-label">ABOUT</span>
+      <h2 class="section-title">炭火の前で、<br>時間を忘れてください。</h2>
+      <div class="about-text">
+        <p>万福亭は、本庄市けや木にある炭火焼肉の店です。特別なコンセプトがあるわけではなく、ただ「おいしいお肉をゆっくり食べてほしい」という気持ちだけでずっとやってきました。</p>
+        <p>仕入れのお肉は毎日確認して、その日よいと思ったものをお出しします。カルビ、タン、ホルモン——それぞれ丁寧に仕込んで、炭の火でシンプルに焼く。それだけです。</p>
+        <p>宴会のご予約もお気軽にどうぞ。大人数でも、少人数でも、気兼ねなくご相談ください。</p>
+      </div>
+      <div class="about-sig">
+        <span>店主より</span>
+        万福亭　主人
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<div class="menu-section">
+  <section class="section" id="menu" style="padding-bottom: 9rem;">
+    <div class="reveal">
+      <span class="section-label">MENU</span>
+      <h2 class="section-title">お品書き</h2>
+      <p class="section-sub">仕入れの状況により内容が変わる場合がございます。くわしくはお気軽にお尋ねください。</p>
+    </div>
+    <div class="menu-grid reveal" style="transition-delay:0.1s">
+      <div class="menu-card">
+        <div class="menu-card-num">一</div>
+        <div class="menu-card-body">
+          <h3>和牛上カルビ</h3>
+          <p>とろけるような霜降りと、炭火の香ばしさが重なる一品。当店で一番人気のメニューです。</p>
+          <div class="menu-card-price">¥1,200 <small>〜（税込）</small></div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">二</div>
+        <div class="menu-card-body">
+          <h3>和牛上タン塩</h3>
+          <p>絶妙な厚みでカット。さっと炭火に当てて、塩とレモンでシンプルに。鮮度が命の一皿です。</p>
+          <div class="menu-card-price">¥1,500 <small>〜（税込）</small></div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">三</div>
+        <div class="menu-card-body">
+          <h3>極上ホルモン</h3>
+          <p>プリッとした食感と旨みが特徴。丁寧な下処理で臭みなく仕上げた自慢の一品です。</p>
+          <div class="menu-card-price">¥1,500 <small>〜（税込）</small></div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">四</div>
+        <div class="menu-card-body">
+          <h3>コリコリ</h3>
+          <p>ここでしか出会えない独特の食感。何これ？と言われることが多い、隠れた人気メニューです。</p>
+          <div class="menu-card-price">¥1,500 <small>〜（税込）</small></div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note reveal" style="transition-delay:0.2s">※ 写真・価格はイメージです。仕入れ状況により変動することがあります。</p>
+  </section>
+</div>
+
+<!-- INFO -->
+<section class="section" id="visit">
+  <div class="reveal">
+    <span class="section-label">ACCESS</span>
+    <h2 class="section-title">店舗案内</h2>
+    <p class="section-sub">お車でお越しの際は、店舗前の駐車場をご利用ください。</p>
+  </div>
+  <div class="info-wrap">
+    <div class="info-rows reveal">
+      <div class="info-row">
+        <div class="info-key">店名</div>
+        <div class="info-val">焼肉 万福亭（まんぷくてい）</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">所在地</div>
+        <div class="info-val">〒367-0042<br>埼玉県本庄市けや木３丁目２４−１０</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">電話番号</div>
+        <div class="info-val"><a href="tel:0495-24-3456">0495-24-3456</a></div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">営業時間</div>
+        <div class="info-val">17:00 〜 22:00<br><small style="font-size:0.75em; letter-spacing:0.05em;">L.O. 21:30</small></div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">定休日</div>
+        <div class="info-val">毎週水曜日</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">お支払い</div>
+        <div class="info-val">現金 / PayPay</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">駐車場</div>
+        <div class="info-val">あり<span class="info-badge">無料</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <iframe 
+        class="map-frame"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3215.3533285741024!2d139.18247077636605!3d36.230919372415175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601f200c86295555%3A0xe54e20790d0b000!2z54S86IKJ5LiH56aP5Lqt!5e0!3m2!1sja!2sjp!4v1714621500000!5m2!1sja!2sjp"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="万福亭の地図">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2 class="reveal">ご予約・お問い合わせ</h2>
+  <p class="reveal" style="transition-delay:0.1s">宴会のご予約もお気軽にどうぞ。<br>お電話でお待ちしています。</p>
+  <a href="tel:0495-24-3456" class="cta-tel reveal" style="transition-delay:0.2s">
+    <span class="tel-num">0495-24-3456</span>
+    <span class="tel-sub">営業時間 17:00〜22:00　定休日：水曜</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">
+      焼肉 万福亭
+      <small>YAKINIKU MANPUKUTEI</small>
+    </a>
+    <div class="footer-links">
+      <a href="#about">こだわり</a>
+      <a href="#menu">メニュー</a>
+      <a href="#visit">店舗案内</a>
+      <a href="#privacy">プライバシーポリシー</a>
+      <a href="#law">特定商取引法</a>
+    </div>
+  </div>
+  <div class="legal-drawer" id="privacy">
+    <strong>【プライバシーポリシー】</strong><br>
+    焼肉 万福亭は、お客様の個人情報を予約管理およびサービス提供の目的のみに使用し、適切に管理いたします。
+  </div>
+  <div class="legal-drawer" id="law">
+    <strong>【特定商取引法に基づく表記】</strong><br>
+    販売業者：焼肉 万福亭　／　所在地：埼玉県本庄市けや木３丁目２４−１０　／　電話番号：0495-24-3456<br>
+    お支払方法：現金・PayPay　／　商品代金以外の料金：消費税（税込表示）
+  </div>
+  <p class="footer-copy">&copy; 2026 焼肉 万福亭. All Rights Reserved.</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.boxShadow = window.scrollY > 40 ? '0 4px 24px rgba(0,0,0,0.08)' : 'none';
+});
+</script>
+</body>
+</html>
