@@ -317,7 +317,7 @@ nav {
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5px;
   background: var(--line);
-  border: 1.5px solid var(--line);
+  outline: 1.5px solid var(--line);
 }
 .menu-card {
   background: var(--warm-white);
@@ -541,7 +541,7 @@ footer {
 @media (max-width: 900px) {
   /* Nav */
   .nav-links { display: none; }
-  nav { padding: 1rem 5%; }
+  nav { padding: 1rem 16px; }
 
   /* Hero: stack vertically, image on top */
   .hero {
@@ -581,7 +581,7 @@ footer {
   .strip-item .num { font-size: 2rem; }
 
   /* Sections */
-  .section { padding: 5rem 6%; }
+  .section { padding: 5rem 16px; }
 
   /* About */
   .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -603,13 +603,20 @@ footer {
 
 /* ── RESPONSIVE: MOBILE ── */
 @media (max-width: 480px) {
-  /* Nav */
-  nav { padding: 0.9rem 4%; }
-  .nav-logo { font-size: 1.1rem; }
+  /* Nav: pxベースで確実に収める */
+  nav { padding: 0.85rem 16px; gap: 0; }
+  .nav-logo { font-size: 1rem; letter-spacing: 0.04em; flex-shrink: 0; }
+  .nav-tel-mobile {
+    flex-shrink: 0;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
 
   /* Hero */
   .hero-right { height: 62vw; }
-  .hero-left { padding: 2rem 5% 3.5rem; }
+  .hero-left { padding: 2rem 16px 3.5rem; }
   .hero-tag { font-size: 0.65rem; letter-spacing: 0.25em; margin-bottom: 1rem; }
   .hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); margin-bottom: 1.2rem; }
   .hero-sub { font-size: 0.82rem; margin-bottom: 2rem; max-width: 100%; }
@@ -636,7 +643,8 @@ footer {
   .about-text { font-size: 0.84rem; }
 
   /* Menu */
-  .menu-card { flex-direction: column; gap: 0.8rem; padding: 1.5rem; }
+  .menu-card { flex-direction: column; gap: 0.8rem; padding: 1.4rem 16px; }
+  .menu-grid { outline: none; border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); }
   .menu-card-num { font-size: 1.8rem; width: auto; }
   .menu-card-body h3 { font-size: 1.05rem; }
 
@@ -722,7 +730,7 @@ footer {
       <div class="about-text">
         <p>万福亭は、本庄市けや木にある炭火焼肉の店です。特別なコンセプトがあるわけではなく、ただ「おいしいお肉をゆっくり食べてほしい」という気持ちだけでずっとやってきました。</p>
         <p>仕入れのお肉は毎日確認して、その日よいと思ったものをお出しします。カルビ、タン、ホルモン——それぞれ丁寧に仕込んで、炭の火でシンプルに焼く。それだけです。</p>
-        <p>団体でのご予約もお気軽にどうぞ。大人数でも、少人数でも、気兼ねなくご相談ください。</p>
+        <p>宴会のご予約もお気軽にどうぞ。大人数でも、少人数でも、気兼ねなくご相談ください。</p>
       </div>
       <div class="about-sig">
         <span>店主より</span>
@@ -769,7 +777,7 @@ footer {
         <div class="menu-card-num">四</div>
         <div class="menu-card-body">
           <h3>コリコリ</h3>
-          <p>ここでしか出会えない独特の食感。何これ！と言われることが多い、隠れた人気メニューです。</p>
+          <p>ここでしか出会えない独特の食感。何これ？と言われることが多い、隠れた人気メニューです。</p>
           <div class="menu-card-price">¥1,500 <small>〜（税込）</small></div>
         </div>
       </div>
