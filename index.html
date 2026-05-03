@@ -88,6 +88,21 @@ nav {
   font-weight: 500;
 }
 .nav-tel:hover { background: var(--emberglow) !important; transform: translateY(-1px); }
+.nav-tel-mobile {
+  display: none;
+  background: var(--ember);
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .nav-tel-mobile { display: inline-block; }
+}
 
 /* ── HERO ── */
 .hero {
@@ -522,18 +537,124 @@ footer {
   transform: translateY(0);
 }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE: TABLET ── */
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-right { height: 55vw; }
-  .hero-right::after { background: linear-gradient(to bottom, transparent 40%, var(--warm-white) 100%); }
-  .hero-left { padding: 8rem 6% 4rem; }
-  .about-wrap, .info-wrap { grid-template-columns: 1fr; gap: 3rem; }
-  .about-img-stack { height: 320px; }
-  .menu-grid { grid-template-columns: 1fr; }
-  .intro-strip { gap: 2.5rem; }
-  .strip-divider { display: none; }
+  /* Nav */
   .nav-links { display: none; }
+  nav { padding: 1rem 5%; }
+
+  /* Hero: stack vertically, image on top */
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+  }
+  .hero-right {
+    order: -1;
+    height: 56vw;
+    min-height: 220px;
+  }
+  .hero-right::after {
+    background: linear-gradient(to bottom, transparent 55%, var(--warm-white) 100%);
+  }
+  .hero-left {
+    padding: 2.5rem 6% 4rem;
+    justify-content: flex-start;
+  }
+  /* SCROLLインジケーターはモバイルで非表示 */
+  .hero-scroll { display: none; }
+
+  /* Strip */
+  .intro-strip {
+    gap: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .strip-divider { display: none; }
+  .strip-item {
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .strip-item:nth-child(even) { border-right: none; }
+  .strip-item .num { font-size: 2rem; }
+
+  /* Sections */
+  .section { padding: 5rem 6%; }
+
+  /* About */
+  .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-img-stack { height: 260px; }
+
+  /* Menu */
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-card { padding: 1.8rem; }
+
+  /* Info */
+  .info-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .info-row { grid-template-columns: 5.5rem 1fr; }
+  .map-frame { aspect-ratio: 4/3; }
+
+  /* CTA */
+  .cta-banner { padding: 5rem 6%; }
+  .cta-banner::before { font-size: 14rem; }
+}
+
+/* ── RESPONSIVE: MOBILE ── */
+@media (max-width: 480px) {
+  /* Nav */
+  nav { padding: 0.9rem 4%; }
+  .nav-logo { font-size: 1.1rem; }
+
+  /* Hero */
+  .hero-right { height: 62vw; }
+  .hero-left { padding: 2rem 5% 3.5rem; }
+  .hero-tag { font-size: 0.65rem; letter-spacing: 0.25em; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); margin-bottom: 1.2rem; }
+  .hero-sub { font-size: 0.82rem; margin-bottom: 2rem; max-width: 100%; }
+  .hero-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Strip */
+  .strip-item .num { font-size: 1.6rem; }
+  .strip-item .label { font-size: 0.62rem; letter-spacing: 0.15em; }
+  .strip-item { padding: 1.5rem 0.5rem; }
+
+  /* Section titles */
+  .section-title { font-size: 1.6rem; }
+  .section-sub { font-size: 0.8rem; max-width: 100%; }
+
+  /* About image stack: シンプルに1枚表示 */
+  .about-img-stack { height: 220px; }
+  .about-img-accent { display: none; }
+  .about-img-main { width: 100%; height: 100%; position: relative; top: auto; left: auto; }
+  .about-text { font-size: 0.84rem; }
+
+  /* Menu */
+  .menu-card { flex-direction: column; gap: 0.8rem; padding: 1.5rem; }
+  .menu-card-num { font-size: 1.8rem; width: auto; }
+  .menu-card-body h3 { font-size: 1.05rem; }
+
+  /* Info table */
+  .info-row { grid-template-columns: 1fr; gap: 0.3rem; padding: 1.2rem 0; }
+  .info-key { font-size: 0.65rem; }
+  .info-val { font-size: 0.84rem; }
+
+  /* CTA */
+  .cta-tel .tel-num { font-size: 2.2rem; }
+  .cta-tel .tel-sub { font-size: 0.65rem; letter-spacing: 0.15em; text-align: center; }
+  .cta-banner h2 { font-size: 1.5rem; }
+  .cta-banner p { font-size: 0.8rem; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; gap: 1.5rem; }
+  .footer-links { gap: 1rem; }
+  .footer-copy { text-align: center; }
 }
 </style>
 </head>
@@ -548,6 +669,7 @@ footer {
     <li><a href="#visit">店舗案内</a></li>
     <li><a href="tel:0495-24-3456" class="nav-tel">☎ 予約する</a></li>
   </ul>
+  <a href="tel:0495-24-3456" class="nav-tel-mobile">☎ 予約</a>
 </nav>
 
 <!-- HERO -->
@@ -572,7 +694,7 @@ footer {
   </div>
   <div class="strip-divider"></div>
   <div class="strip-item">
-    <div class="num">17:00〜</small></div>
+    <div class="num">17<small style="font-size:1.2rem">:00〜</small></div>
     <div class="label">OPEN</div>
   </div>
   <div class="strip-divider"></div>
